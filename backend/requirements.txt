@@ -2,3 +2,5 @@ Django
 mysqlclient
 python-decouple
 djangorestframework
+djangorestframework-simplejwt
+djangorestframework

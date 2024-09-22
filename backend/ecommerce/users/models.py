@@ -1,20 +1,10 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import User
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
 
-class CustomUser(AbstractUser):
-    # Adicione related_name para evitar conflitos
-    groups = models.ManyToManyField(
-        Group,
-        related_name='customuser_set',
-        blank=True,
-        help_text='The groups this user belongs to.',
-        related_query_name='customuser',
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name='customuser_set',
-        blank=True,
-        help_text='Specific permissions for this user.',
-        related_query_name='customuser',
-    )
+    def __str__(self):
+        return self.user.username
